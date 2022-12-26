@@ -1,7 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
 
+const remote = window.require('@electron/remote')
+const { BrowserWindow } = remote
+
 function App() {
+  const handleButtonClick = () => {
+    let win = new BrowserWindow()
+    win.loadURL('https://www.electronjs.org/docs/api/remote')
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +25,7 @@ function App() {
         >
           Learn React
         </a>
+      <button onClick={handleButtonClick}>test</button>
       </header>
     </div>
   );
