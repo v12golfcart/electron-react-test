@@ -1,8 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 
-const remote = window.require('@electron/remote')
-const { BrowserWindow } = remote
+const isElectron = () => {
+  const userAgent = navigator.userAgent.toLowerCase();
+  return userAgent.indexOf(' electron/') > -1
+}
+console.log('Is electron?', isElectron())
+
+let remote, BrowserWindow;
+if (isElectron()) {
+  remote = window.require('@electron/remote')
+  BrowserWindow = remote.BrowserWindow
+}
 
 function App() {
   const handleButtonClick = () => {
@@ -25,7 +34,7 @@ function App() {
         >
           Learn React
         </a>
-      <button onClick={handleButtonClick}>test</button>
+      {isElectron() && <button onClick={handleButtonClick}>test</button>}
       </header>
     </div>
   );
